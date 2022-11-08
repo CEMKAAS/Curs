@@ -1,11 +1,8 @@
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class MaxCategory {
-
+   private Map<String,Integer> ages = new HashMap<>();
     private String category;
     private Integer sum;
 
@@ -31,20 +28,29 @@ public class MaxCategory {
     }
 
 
-    public void People (String category1, Integer sum1){
-        Map<String,Integer> ages = new HashMap<>();
-        Integer sum2 = 0;
-        sum2 += sum1;
-        ages.put(category1, sum2);
+    public void People (String category1, Integer sum1) {
+        if (ages.get(category1) == null) {
+            ages.put(category1, sum1);
+        } else {
+            int sum2 = ages.get(category1) + sum1;
+            ages.put(category1, sum2);
+            System.out.println(ages);
+        }
 
-       
+        Collection<String> collection= ages.keySet();
 
-        Collections.sort(people, comparator1);
-        System.out.println(people);
-        System.out.println(ages. Collections.max(ages.values()));
-        System.out.println(ages);
+        String maxtitle = ages.entrySet().stream()
+                .filter(entry -> Collections.max(ages.values()).equals(entry.getValue()))
+                .findFirst().map(Map.Entry::getKey)
+                .orElse(null);
+
+//        map.keySet()
+//                .stream()
+//                .filter(key -> value.equals(map.get(key)))
+//                .findFirst().get();
+
+        System.out.println(maxtitle + " " + Collections.max(ages.values()));
     }
-
 
 
 

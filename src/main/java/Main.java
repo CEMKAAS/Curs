@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
+        MaxCategory maxCategory = new MaxCategory();
         try (ServerSocket serverSocket = new ServerSocket(8080);) {
 //String[] tsv = "булка'\t'еда'\t'колбаса'\t'еда'\t'сухарики'\t'еда'\t'курица'\t'еда'\t'тапки'\t'одежда'\t'шапка'\t'одежда'\t'мыло'\t'быт'\t'акции'\t'финасы".split(String.valueOf('\t'));
 //        String[] tsv1 = "булка|еда".split(String.valueOf('|'));
@@ -43,7 +43,7 @@ public class Main {
                         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 ) {
-                    MaxCategory maxCategory = new MaxCategory();
+
                     out.println("Start Server");
                     String serverResponseTwo = in.readLine();
                     Gson gson = new Gson();
@@ -76,7 +76,7 @@ public class Main {
                         String  sum = nextLine[1];
                         if (title.equals(category.getTitle())){
                             maxCategory.People(sum, category.getSum());
-                            System.out.println(title +" " + sum);
+//                            System.out.println(title +" " + sum);
                             break;
                         }else {
                             //TODO категория другая
