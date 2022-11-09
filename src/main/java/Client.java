@@ -22,9 +22,11 @@ public class Client {
             String json1 = scanner.nextLine();
             String[] parts = json1.split(" ");
             String title = parts[0];
-            Integer sum = Integer.valueOf(parts[1]);
-            Calendar calendar = Calendar.getInstance();
-            String data = calendar.get(Calendar.YEAR) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.DAY_OF_MONTH);
+            String data = parts[1];
+            Integer sum = Integer.valueOf(parts[2]);
+//            Calendar calendar = Calendar.getInstance();
+//            String data = calendar.get(Calendar.YEAR) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.DAY_OF_MONTH);
+
             Gson gson = new Gson();
             Category category = new Category(title, data, sum);
             out.println(gson.toJson(category));
@@ -36,3 +38,4 @@ public class Client {
         }
     }
 }
+//булка 09.11.2022 200

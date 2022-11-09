@@ -76,6 +76,7 @@ public class Main {
                         String  sum = nextLine[1];
                         if (title.equals(category.getTitle())){
                             maxCategory.People(sum, category.getSum());
+                            maxCategory.People2(sum,category.getTitle(),category.getDate(), category.getSum());
 //                            System.out.println(title +" " + sum);
                             break;
                         }else {

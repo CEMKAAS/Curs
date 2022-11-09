@@ -1,9 +1,9 @@
-public class Category {
+public class MaxTime {
     private String title;
     private String date;
     private Integer sum;
 
-    public Category(String title, String date, Integer sum) {
+    public MaxTime(String title, String date, Integer sum) {
         this.title = title;
         this.date = date;
         this.sum = sum;
@@ -35,11 +35,10 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category{" +
+        return "MaxTime{" +
                 "title='" + title + '\'' +
                 ", date='" + date + '\'' +
                 ", sum=" + sum +
                 '}';
     }
-
 }
