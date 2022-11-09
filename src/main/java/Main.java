@@ -11,14 +11,15 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         MaxCategory maxCategory = new MaxCategory();
         try (ServerSocket serverSocket = new ServerSocket(8080);) {
-//String[] tsv = "булка'\t'еда'\t'колбаса'\t'еда'\t'сухарики'\t'еда'\t'курица'\t'еда'\t'тапки'\t'одежда'\t'шапка'\t'одежда'\t'мыло'\t'быт'\t'акции'\t'финасы".split(String.valueOf('\t'));
-//        String[] tsv1 = "булка|еда".split(String.valueOf('|'));
+//String[] tsv = "пїЅпїЅпїЅпїЅпїЅ'\t'пїЅпїЅпїЅ'\t'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'\t'пїЅпїЅпїЅ'\t'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ'\t'пїЅпїЅпїЅ'\t'пїЅпїЅпїЅпїЅпїЅпїЅ'\t'пїЅпїЅпїЅ'\t'пїЅпїЅпїЅпїЅпїЅ'\t'пїЅпїЅпїЅпїЅпїЅпїЅ'\t'пїЅпїЅпїЅпїЅпїЅ'\t'пїЅпїЅпїЅпїЅпїЅпїЅ'\t'пїЅпїЅпїЅпїЅ'\t'пїЅпїЅпїЅ'\t'пїЅпїЅпїЅпїЅпїЅ'\t'пїЅпїЅпїЅпїЅпїЅпїЅ".split(String.valueOf('\t'));
+//        String[] tsv1 = "пїЅпїЅпїЅпїЅпїЅ|пїЅпїЅпїЅ".split(String.valueOf('|'));
 //
 //            try (CSVWriter writer = new CSVWriter(new FileWriter("categories.tsv", true))) {
 //                writer.writeNext(tsv);
@@ -28,16 +29,16 @@ public class Main {
 //            }
 //            File tsvFile = new File("categories.tsv");
 //            PrintWriter tsv = new PrintWriter(tsvFile);
-//            tsv.print("булка" + '\t' + "eда");
-//            tsv.println("колбаса" + '\t' + "eда");
-//            tsv.println("сухарики" + '\t' + "eда");
-//            tsv.println("курица" + '\t' + "eда");
-//            tsv.println("тапки" + '\t' + "одежда");
-//            tsv.println("шапка" + '\t' + "одежда");
-//            tsv.println("мыло" + '\t' + "быт");
-//            tsv.println("акции" + '\t' + "финансы");
+//            tsv.print("пїЅпїЅпїЅпїЅпїЅ" + '\t' + "eпїЅпїЅ");
+//            tsv.println("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" + '\t' + "eпїЅпїЅ");
+//            tsv.println("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" + '\t' + "eпїЅпїЅ");
+//            tsv.println("пїЅпїЅпїЅпїЅпїЅпїЅ" + '\t' + "eпїЅпїЅ");
+//            tsv.println("пїЅпїЅпїЅпїЅпїЅ" + '\t' + "пїЅпїЅпїЅпїЅпїЅпїЅ");
+//            tsv.println("пїЅпїЅпїЅпїЅпїЅ" + '\t' + "пїЅпїЅпїЅпїЅпїЅпїЅ");
+//            tsv.println("пїЅпїЅпїЅпїЅ" + '\t' + "пїЅпїЅпїЅ");
+//            tsv.println("пїЅпїЅпїЅпїЅпїЅ" + '\t' + "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 
-            while (true) { // в цикле(!) принимаем подключения
+            while (true) { // пїЅ пїЅпїЅпїЅпїЅпїЅ(!) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 try (
                         Socket socket = serverSocket.accept();
                         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -63,6 +64,7 @@ public class Main {
 //                    }catch (IOException e){
 //                        e.printStackTrace();
 //                    }
+
                     CSVParser parser = new CSVParserBuilder()
                             .withSeparator('\t')
                             .build();
@@ -71,15 +73,19 @@ public class Main {
                             .build();
 
                     String[] nextLine;
-                    while ((nextLine= reader.readNext()) != null){
+                    while ((nextLine = reader.readNext()) != null) {
                         String title = nextLine[0];
-                        String  sum = nextLine[1];
-                        if (title.equals(category.getTitle())){
+                        String sum = nextLine[1];
+                        if (title.equals(category.getTitle())) {
                             maxCategory.People(sum, category.getSum());
+                            maxCategory.PeopleYear(sum, 2022, category.getSum());
+                            maxCategory.PeopleMount(sum, 11, category.getSum());
+                            maxCategory.PeopleDays(sum, 9, category.getSum());
+
 //                            System.out.println(title +" " + sum);
                             break;
-                        }else {
-                            //TODO категория другая
+                        } else {
+                            //TODO пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                         }
 
                     }
@@ -87,7 +93,7 @@ public class Main {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Не могу стартовать сервер");
+            System.out.println("пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
             e.printStackTrace();
         }
     }
