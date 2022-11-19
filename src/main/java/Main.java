@@ -38,49 +38,23 @@ public class Main {
                             .withCSVParser(parser)
                             .build();
 
-                    Map<String, String> days = new HashMap<>();
-                    List<String[]> time = reader.readAll();
-                    for (String[] num : time
+                    Map<String, String> categoryInTSV = new HashMap<>();
+                    List<String[]> listCategoryInTSV = reader.readAll();
+                    for (String[] line : listCategoryInTSV
                     ) {
-                        String two = num[0];
-                        String sum = num[1];
-                        days.put(two, sum);
+                        String title = line[0];
+                        String titleCategory = line[1];
+                        categoryInTSV.put(title, titleCategory);
                     }
 
-
-                    System.out.println(days.get(category.getTitle()));
-                    if (days.get(category.getTitle()) != null) {
-
+                    if (categoryInTSV.get(category.getTitle()) != null) {
                         out.println(
-                                output(category, days.get(category.getTitle()))
+                                output(category, categoryInTSV.get(category.getTitle()))
                         );
-
-//                        String[] mount = category.getDate().split("\\.");
-//                        String mountTwo = mount[1];
-//                        String mountTrne = mount[2];
-//                        String sum = days.get(category.getTitle());
-//                        String sd = gson.toJson(maxCategory.People(sum, category.getSum()));
-//                        String sd1 = gson.toJson(maxCategory.People3(sum, category.getDate(), category.getSum()));
-//                        String sd2 = gson.toJson(maxCategory.People4(sum, mountTwo + "." + mountTrne, category.getSum()));
-//                        String sd3 = gson.toJson(maxCategory.People5(sum, mountTrne, category.getSum()));
-//
-//                        out.println(
-//                                sd + sd1 + sd2 + sd3
-//                        );
                     } else {
                         out.println(
                                 output(category, "другое")
                         );
-//                        String sum = "другое";
-//                        String[] mount = category.getDate().split("\\.");
-//                        String mountTwo = mount[1];
-//                        String mountTrne = mount[2];
-//
-//                        MaxJson maxCategot = (maxCategory.People(sum, category.getSum()));
-//                        maxCategot.getCategory();
-//                        maxCategot.getSum();
-//
-//                        out.println(gson.toJson(maxCategot.getCategory()));
                     }
                 }
             }
@@ -91,15 +65,15 @@ public class Main {
         }
     }
 
-    public String output(Category category, String sum) {
+    public String output(Category category, String titleCategory) {
         Gson gson = new Gson();
-        String[] mount = category.getDate().split("\\.");
-        String mountTwo = mount[1];
-        String mountTrne = mount[2];
-        String sd = gson.toJson(maxCategory.People(sum, category.getSum()));
-        String sd1 = gson.toJson(maxCategory.People3(sum, category.getDate(), category.getSum()));
-        String sd2 = gson.toJson(maxCategory.People4(sum, mountTwo + "." + mountTrne, category.getSum()));
-        String sd3 = gson.toJson(maxCategory.People5(sum, mountTrne, category.getSum()));
+        String[] date = category.getDate().split("\\.");
+        String mount = date[1];
+        String year = date[2];
+        String sd = gson.toJson(maxCategory.maxCategory(titleCategory, category.getSum()));
+        String sd1 = gson.toJson(maxCategory.maxDayCategory(titleCategory, category.getDate(), category.getSum()));
+        String sd2 = gson.toJson(maxCategory.maxMountCategory(titleCategory, mount + "." + year, category.getSum()));
+        String sd3 = gson.toJson(maxCategory.maxYearCategory(titleCategory, year, category.getSum()));
         return sd + sd1 + sd2 + sd3;
     }
 }
