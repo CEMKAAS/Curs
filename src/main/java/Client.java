@@ -15,22 +15,22 @@ public class Client {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         ) {
-            String serverResponse = in.readLine();
+            String serverBegin = in.readLine();
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Start введите покупку и сумму");
-            System.out.println(serverResponse);
-            String json1 = scanner.nextLine();
-            String[] parts = json1.split(" ");
+            System.out.println(serverBegin);
 
-            String title = parts[0];
-            String data = parts[1];
-            Integer sum = Integer.valueOf(parts[2]);
+            String dataEntry = scanner.nextLine();
+            String[] dataEntryParts = dataEntry.split(" ");
+
+            String title = dataEntryParts[0];
+            String date = dataEntryParts[1];
+            Integer price = Integer.valueOf(dataEntryParts[2]);
 
             Gson gson = new Gson();
-            Category category = new Category(title, data, sum);
+            Category category = new Category(title, date, price);
             out.println(gson.toJson(category));
-            String serverResponseTwo = in.readLine();
-            System.out.println(serverResponseTwo);
+            String output = in.readLine();
+            System.out.println(output);
         } catch (
                 IOException e) {
             System.out.println("Не могу стартовать сервер");
