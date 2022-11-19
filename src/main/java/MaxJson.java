@@ -1,20 +1,20 @@
 public class MaxJson {
-    private String maxCategory;
+    private String time;
     private String category;
     private Integer sum;
 
-    public MaxJson(String maxCategory, String category, Integer sum) {
-        this.maxCategory = maxCategory;
+    public MaxJson(String time, String category, Integer sum) {
+        this.time = time;
         this.category = category;
         this.sum = sum;
     }
 
     public String getMaxCategory() {
-        return maxCategory;
+        return time;
     }
 
     public void setMaxCategory(String maxCategory) {
-        this.maxCategory = maxCategory;
+        this.time = time;
     }
 
     public String getCategory() {
@@ -36,7 +36,7 @@ public class MaxJson {
     @Override
     public String toString() {
         return "MaxJson{" +
-                "maxCategory='" + maxCategory + '\'' +
+                "maxCategory='" + time + '\'' +
                 ", category='" + category + '\'' +
                 ", sum=" + sum +
                 '}';
