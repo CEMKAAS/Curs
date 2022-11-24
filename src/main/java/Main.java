@@ -25,9 +25,13 @@ public class Main {
                         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 ) {
                     out.println("Start!" + " ¬ведите покупку и сумму в таком формате " + "пример: булка 03.10.2022 300");
+                    File binFile = new File("basket.bin");
                     String dataEntry = in.readLine();
                     Gson gson = new Gson();
                     Category category = gson.fromJson(dataEntry, Category.class);
+
+                    System.out.println(category.getTitle());//можно удалить
+
                     //парсим
                     CSVParser parser = new CSVParserBuilder()
                             .withSeparator('\t')
@@ -45,6 +49,10 @@ public class Main {
                         categoryInTSV.put(title, titleCategory);
                     }
 
+//                    if (binFile.exists()) {
+//                        maxCategory.loadBinFile(binFile);
+//                    }
+
                     if (categoryInTSV.get(category.getTitle()) != null) {
                         out.println(
                                 output(category, categoryInTSV.get(category.getTitle()))
@@ -54,6 +62,8 @@ public class Main {
                                 output(category, "другое")
                         );
                     }
+//                    maxCategory.saveBin(binFile);
+
                 }
             }
         } catch (

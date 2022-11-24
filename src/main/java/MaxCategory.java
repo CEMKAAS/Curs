@@ -9,7 +9,6 @@ public class MaxCategory {
     private ArrayList<Category> arraysMount = new ArrayList<>();
     private ArrayList<Category> arraysYear = new ArrayList<>();
 
-
     public MaxJson maxCategory(String titleCategory, Integer price) {
         if (maxCategoryAllTime.get(titleCategory) == null) {
             maxCategoryAllTime.put(titleCategory, price);
@@ -26,7 +25,7 @@ public class MaxCategory {
 
     public MaxJson maxDayCategory(String titleCategory, String date, Integer price) {
         arraysDays.add(new Category(titleCategory, date, price));
-        String[] lineMaxDay = add(date, arraysDays).split(" ");
+        String[] lineMaxDay = calcMaxCategory(date, arraysDays).split(" ");
         String maxDayTitle = lineMaxDay[0];
         Integer maxDayPrice = Integer.valueOf(lineMaxDay[1]);
         return new MaxJson("maxDayCategory", maxDayTitle, maxDayPrice);
@@ -34,7 +33,7 @@ public class MaxCategory {
 
     public MaxJson maxMountCategory(String titleCategory, String date, Integer price) {
         arraysMount.add(new Category(titleCategory, date, price));
-        String[] lineMaxMount = add(date, arraysMount).split(" ");
+        String[] lineMaxMount = calcMaxCategory(date, arraysMount).split(" ");
         String maxMountTitle = lineMaxMount[0];
         Integer maxMountPrice = Integer.valueOf(lineMaxMount[1]);
         return new MaxJson("maxMonthCategory", maxMountTitle, maxMountPrice);
@@ -42,13 +41,13 @@ public class MaxCategory {
 
     public MaxJson maxYearCategory(String titleCategory, String date, Integer price) {
         arraysYear.add(new Category(titleCategory, date, price));
-        String[] lineMaxYear = add(date, arraysYear).split(" ");
+        String[] lineMaxYear = calcMaxCategory(date, arraysYear).split(" ");
         String maxYearTitle = lineMaxYear[0];
         Integer maxYearPrice = Integer.valueOf(lineMaxYear[1]);
         return new MaxJson("maxYearCategory", maxYearTitle, maxYearPrice);
     }
 
-    public String add(String date, ArrayList list) {
+    public String calcMaxCategory(String date, ArrayList list) {
         Map<String, Integer> mapMaxCategory = new HashMap<>();
         Iterator<Category> maxTimeIterator = list.iterator();
 
@@ -70,4 +69,28 @@ public class MaxCategory {
 
         return maxTitle + " " + Collections.max(mapMaxCategory.values());
     }
+
+//    public void saveBin(File binFile) {
+//        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(binFile))) {
+//            objectOutputStream.writeObject(this);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+//    public static MaxCategory loadBinFile(File binFile) throws IOException, ClassNotFoundException {
+//        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(binFile))) {
+//            MaxCategory maxCategory = (MaxCategory) objectInputStream.readObject();
+//            maxCategory.setArraysMount(arraysMount);
+//            maxCategory.setArraysDays(arraysDays);
+//            maxCategory.setArraysYear(arraysYear);
+//            maxCategory.setMaxCategoryAllTime(maxCategoryAllTime);
+//            return maxCategory;
+//        }
+//    }
+
+
+
+
+
 }
